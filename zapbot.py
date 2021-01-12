@@ -1,44 +1,29 @@
 from selenium import webdriver
 import time
+from webdriver_manager.chrome import ChromeDriverManager 
+from selenium.webdriver.common.keys import Keys
 
-class WhatsappBot:
-    def __init__(self):
-        self.mensagem = ["Teste"]
-        self.grupos = ["Trabalho", "Cinema - Técnica"]
-        options = webdriver.ChromeOptions()
-        options.add_argument("lang=pt-br")
-        self.driver = webdriver.Chrome(executable_path=r"./chromedriver.exe")
+driver = webdriver.Chrome(ChromeDriverManager().install())
+driver.get('https://web.whatsapp.com/')
+time.sleep(8)
+contatos = ['Trabalho','Aline Nunes','Adeilton','Paixão Vegan - Rep SP', 'Paixão teste','+5521971468941','+5521995437223´~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[´[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[']
+mensagem = "teste"
 
-    def EnviarMensagens(self):
-        #<div tabindex="-1" class="_2HE1Z _1aIlm">
-        #<span dir="auto" title="Cinema - Técnica" class="_1hI5g _1XH7x _1VzZY">Cinema - Técnica</span>
-            #<div tabindex="-1" class="DuUXI">
-                #<span data-testid="send" data-icon="send" class="">
-        self.driver.get("https://web.whatsapp.com/")   
-        time.sleep(5)
-        a=0     
-        for grupo in self.grupos:
-            print("enviando msg para:", grupo)
-            time.sleep(5)
-            localizador = self.driver.find_element_by_xpath("//div[@class='_1awRl copyable-text selectable-text']")
-            time.sleep(8)
-            localizador.click()
-            time.sleep(5)
-            localizador.send_keys(self.grupos[a])
-            grupo = self.driver.find_element_by_xpath(f"//span[@title='{grupo}']")
-            time.sleep(8)
-            grupo.click()
-            chat_box = self.driver.find_element_by_class_name('DuUXI')
-            time.sleep(8)
-            chat_box.click()
-            time.sleep(5)
-            chat_box.send_keys(self.mensagem[0])
-            botao_enviar = self.driver.find_element_by_xpath("//span[@data-icon='send']")
-            time.sleep(5)
-            botao_enviar.click()
-            time.sleep(8)
-            a=a+1
-            print(a)
-        
-bot = WhatsappBot()
-bot.EnviarMensagens()
+def buscar_contato(contato):
+    campo_pesquisa = driver.find_element_by_xpath('//div[contains(@class,"copyable-text selectable-text")]')
+    time.sleep(3)
+    campo_pesquisa.click()
+    campo_pesquisa.send_keys(contato)
+    campo_pesquisa.send_keys(Keys.ENTER)
+
+def enviar_mensagem(mensagem):
+    campo_mensagem = driver.find_elements_by_xpath('//div[contains(@class,"copyable-text selectable-text")]')
+    campo_mensagem[1].click()
+    time.sleep(3)
+    campo_mensagem[1].send_keys(mensagem)
+    campo_mensagem[1].send_keys(Keys.ENTER)
+
+
+for contato in contatos:
+    buscar_contato(contato)
+    #enviar_mensagem(mensagem)

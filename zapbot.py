@@ -3,10 +3,12 @@ import time
 from webdriver_manager.chrome import ChromeDriverManager 
 from selenium.webdriver.common.keys import Keys
 
+#programa para enviar mensagens para contatos armazenados na agenda. 
+
 driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.get('https://web.whatsapp.com/')
 time.sleep(8)
-contatos = ['Trabalho','Aline Nunes','Adeilton','Paixão Vegan - Rep SP', 'Paixão teste','+5521971468941','+5521995437223´~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[´[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[']
+contatos = ['Trabalho','Aline Nunes','Adeilton','Paixão Vegan - Rep SP', 'Paixão teste','+5521971468941']
 mensagem = "teste"
 
 def buscar_contato(contato):

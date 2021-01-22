@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 
 #programa para enviar msg para numeros conhecidos ou desconhecidos 
 
+
 numeros = open("qb.txt","r")
 time.sleep(5)
 novo = webdriver.Chrome(ChromeDriverManager().install())
@@ -13,6 +14,8 @@ mensagem = str(msg.read())
 
 
 def enviar_mensagem(mensagem):
+    msg = open("texto.txt","r",encoding="utf8")
+    mensagem = str(msg.read())
     campo_mensagem = novo.find_elements_by_xpath('//div[contains(@class,"copyable-text selectable-text")]')
     campo_mensagem[1].click()
     time.sleep(3)
